@@ -25,7 +25,7 @@
 <body>
 
   <header>
-    <h1>Push Codelab 2020.11.29,15:23</h1>
+    <h1>Push Codelab 2020.11.29,15:34</h1>
   </header>
 
   <main>
@@ -72,16 +72,15 @@
     console.log("HIHIHI....");
   })
 
-  const swRegistration = await navigator.serviceWorker.register('firebase-messaging-sw.js');
+  navigator.serviceWorker.register('firebase-messaging-sw.js').then(function(swReg){
   messaging.getToken(
 	  {
 vapidKey: 'BNqtIb0ld1kxHRSV3NpoAU8HiT2M7oG0wqmyBGF2mfmtXAJ8h-dRqagFFftUAZxypkHSLQ8BfHfu-R-BjAuGE3U',
-serviceWorkerRegistration: swRegistration,
+serviceWorkerRegistration: swReg,
 }).then(
     (currentToken) => {
     if (currentToken) {
       console.log(currentToken);
-
 
       fetch('https://iid.googleapis.com/iid/v1/'+currentToken+'/rel/topics/'+'ondasoopInventory', {
           method: 'POST',
@@ -102,6 +101,7 @@ serviceWorkerRegistration: swRegistration,
   }).catch((err) => {
     console.log('An error occurred while retrieving token. ', err);
   });
+});
 
   </script>
 
